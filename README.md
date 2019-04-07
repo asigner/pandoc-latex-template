@@ -14,15 +14,15 @@ A custom title page      |  A basic example page
 
 ## Installation
 
-1. Install pandoc from <http://pandoc.org/>. You also need to install [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Installation#Distributions).
-2. Download the latest version of the Eisvogel template from [the release page](https://github.com/Wandmalfarbe/pandoc-latex-template/releases/latest).
-3. Extract the downloaded ZIP archive and open the folder.
-4. Move the template `eisvogel.tex` to your pandoc templates folder and rename the file to `eisvogel.latex`.The location of the templates folder depends on your operating system:
-	- Unix, Linux, macOS: `~/.pandoc/templates/`
-	- Windows XP: `C:\Documents And Settings\USERNAME\Application Data\pandoc\templates`
-	- Windows Vista or later: `C:\Users\USERNAME\AppData\Roaming\pandoc\templates`
-	
-	If there are no folders called `templates` or `pandoc` you need to create them and put the template `eisvogel.latex` inside.
+1. Install Docker from <https://www.docker.com/>
+
+## Build Docker image
+
+Run the following command in the current folder.
+
+```bash
+docker build . -t eisvogel:latest
+```
 
 ## Usage
 
@@ -30,7 +30,7 @@ A custom title page      |  A basic example page
 2. Execute the following command
     
     ```bash
-    pandoc example.md -o example.pdf --from markdown --template eisvogel --listings
+    ./eisvogel.sh example.md -o example.pdf
     ```
     
     where `example.md` is the markdown file you want to convert to PDF.
@@ -121,7 +121,7 @@ This template defines some new variables to control the appearance of the result
 For PDFs with [numbered sections](http://pandoc.org/MANUAL.html#options-affecting-specific-writers) use the `--number-sections` or `-N` option.
 	
 ```bash
-pandoc example.md -o example.pdf --template eisvogel --number-sections
+./eisvogel.sh example.md -o example.pdf --number-sections
 ```
 
 ### Syntax Highlighting with Listings
@@ -129,26 +129,26 @@ pandoc example.md -o example.pdf --template eisvogel --number-sections
 You can get syntax highlighting of delimited code blocks by using the LaTeX package listings with the option `--listings`. This example will produce the same syntax highlighting as in the example PDF.
 	
 ```bash
-pandoc example.md -o example.pdf --template eisvogel --listings
+./eisvogel.sh example.md -o example.pdf --listings
 ```
 ### Syntax Highlighting Without Listings
 
 The following examples show [syntax highlighting of delimited code blocks](http://pandoc.org/MANUAL.html#syntax-highlighting) without using listings. To see a list of all the supported highlight styles, type `pandoc --list-highlight-styles`.
 	
 ```bash
-pandoc example.md -o example.pdf --template eisvogel --highlight-style pygments
+./eisvogel.sh example.md -o example.pdf --highlight-style pygments
 ```
 
 ```bash
-pandoc example.md -o example.pdf --template eisvogel --highlight-style kate
+./eisvogel.sh example.md -o example.pdf --highlight-style kate
 ```
 
 ```bash
-pandoc example.md -o example.pdf --template eisvogel --highlight-style espresso
+./eisvogel.sh example.md -o example.pdf --highlight-style espresso
 ```
 
 ```bash
-pandoc example.md -o example.pdf --template eisvogel --highlight-style tango
+./eisvogel.sh example.md -o example.pdf --highlight-style tango
 ```
 
 ### Standalone LaTeX Document
@@ -156,7 +156,7 @@ pandoc example.md -o example.pdf --template eisvogel --highlight-style tango
 To produce a standalone LaTeX document for compiling with any LaTeX editor use `.tex` as an output file extension.
 	
 ```bash
-pandoc example.md -o example.tex --template eisvogel
+./eisvogel.sh example.md -o example.tex
 ```
 
 ### Changing the Document Language
@@ -164,13 +164,13 @@ pandoc example.md -o example.tex --template eisvogel
 The default language of this template is American English. The `lang` variable identifies the main language of the document, using a code according to [BCP 47](https://tools.ietf.org/html/bcp47) (e.g. `en` or `en-GB`). For an incomplete list of the supported language codes see [the documentation for the hyph-utf8 package (Section 2)](http://mirrors.ctan.org/language/hyph-utf8/doc/generic/hyph-utf8/hyph-utf8.pdf). The following example changes the language to British English:
 	
 ```bash
-pandoc example.md -o example.pdf --template eisvogel -V lang=en-GB
+./eisvogel.sh example.md -o example.pdf -V lang=en-GB
 ```
 	
 The following example changes the language to German:
 	
 ```bash
-pandoc example.md -o example.pdf --template eisvogel -V lang=de
+./eisvogel.sh example.md -o example.pdf -V lang=de
 ```
 
 ### Typesetting a Book
