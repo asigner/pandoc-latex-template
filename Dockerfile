@@ -3,6 +3,6 @@ FROM pandoc/latex:2.6
 # Add missing packages
 RUN tlmgr update --self \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
-    sourcecodepro titling pagecolor epstopdf
+    sourcecodepro titling pagecolor epstopdf adjustbox collectbox
 
-ADD eisvogel.latex ~/.pandoc/templates/eisvogel.latex
+COPY eisvogel.tex /root/.pandoc/templates/eisvogel.latex
